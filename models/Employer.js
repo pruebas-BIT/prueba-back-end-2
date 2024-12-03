@@ -1,11 +1,10 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const employerSchema = Schema({
   code: {
     type: Number,
     required: true,
   },
-
   name: {
     type: String,
     required: true,
@@ -19,7 +18,8 @@ const employerSchema = Schema({
     required: false,
   },
   departamentCode: {
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref:'Departament',
     required: true,
   },
 });
