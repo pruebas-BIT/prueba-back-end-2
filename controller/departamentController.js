@@ -1,5 +1,10 @@
 import Departament from "../models/Deprtament.js";
-import { getDepartaments, createNewDepartament, updateDepartament  } from "../services/departamentService.js";
+import {
+  getDepartaments,
+  createNewDepartament,
+  updateDepartament,
+  deleteDepartament,
+} from "../services/departamentService.js";
 
 export async function listDepartament(req, res) {
   try {
@@ -30,17 +35,12 @@ export async function createDepartament(req, res) {
       .status(500)
       .json({ message: `Error al crear el Departamento: ${error.message}` });
   }
-
-
-
 }
-
-
 
 export async function editDepartament(req, res) {
   try {
     const { id } = req.params;
-   
+
     const DepartamentToUpdate = await Departament.findById(id);
 
     if (!DepartamentToUpdate) {
@@ -55,3 +55,21 @@ export async function editDepartament(req, res) {
   }
 }
 
+export async function remove(req, res) {
+  const { codigo } = req.params;
+  try {
+    const departamentoEliminado =
+      await deleteDepartament(codigo);
+    res.send({
+      message: "Departamento eliminado",
+      departamento: departamentoEliminado,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({
+        message: "Error eliminando el departamento",
+        error: error.message,
+      });
+  }
+}

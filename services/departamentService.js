@@ -1,6 +1,5 @@
 import Departament from "../models/Deprtament.js";
 
-
 export async function getDepartaments() {
   try {
     const departaments = await Departament.find();
@@ -26,8 +25,7 @@ export async function createNewDepartament({ departamentCode, name }) {
   }
 }
 
-
-export async function updateDepartament (departamentToUpdate, updateData) {
+export async function updateDepartament(departamentToUpdate, updateData) {
   const { departamentCode, name } = updateData;
 
   if (name) {
@@ -35,9 +33,23 @@ export async function updateDepartament (departamentToUpdate, updateData) {
   }
 
   if (departamentCode) {
-    departamentToUpdate.departamentCode = departamentCode
+    departamentToUpdate.departamentCode = departamentCode;
   }
 
   await departamentToUpdate.save();
   return departamentToUpdate;
+}
+
+export async function deleteDepartament(departamentCode) {
+  try {
+    const departamentoEliminado = await Departament.findOneAndDelete({
+      departamentCode,
+    });
+    if (!departamentoEliminado) {
+      throw new Error("Departamento no encontrado");
+    }
+    return departamentoEliminado;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 }

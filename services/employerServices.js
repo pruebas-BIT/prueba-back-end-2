@@ -26,7 +26,9 @@ export async function addEmployer(data) {
       return employerB;
     }
   } catch (error) {
-    throw new Error(`Error al generar la creación del usuario con codigo: ${code} ${error.message}`);
+    throw new Error(
+      `Error al generar la creación del usuario con codigo: ${code} ${error.message}`
+    );
   }
 }
 
@@ -54,6 +56,19 @@ export async function updateEmployer(employer, data) {
     await employer.save();
     return employer;
   } catch (error) {
-    throw new Error(`No se pudo actualizar el empleado con Codigo: ${data.code}`)
+    throw new Error(
+      `No se pudo actualizar el empleado con Codigo: ${data.code}`
+    );
+  }
+}
+export async function deleteEmployer(code) {
+  try {
+    const empleadoEliminado = await Employer.findOneAndDelete({ code });
+    if (!empleadoEliminado) {
+      throw new Error("empleado no encontrado");
+    }
+    return empleadoEliminado;
+  } catch (error) {
+    throw new Error(error.message);
   }
 }
