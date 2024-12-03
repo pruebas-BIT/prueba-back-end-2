@@ -11,4 +11,7 @@ const departamentSchema = Schema({
   }
 });
 
-export default departamentSchema;
+// Define el modelo usando el esquema correcto
+const Departament = model("Departament", departamentSchema);
+
+export default Departament;

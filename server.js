@@ -2,14 +2,18 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDatabase from "./dataBase/mongoConnet.js";
+import apiRouter from './router/apiRouter.js'
+
 const app = express();
+
+
 
 dotenv.config();
 // const databaseConnect = require("./db/config");
 
 connectDatabase();
 
-app.use("/", api);
+app.use("/", apiRouter);
 
 const port = process.env.PORT || 5020;
 

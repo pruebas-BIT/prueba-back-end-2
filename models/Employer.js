@@ -23,5 +23,6 @@ const employerSchema = Schema({
     required: true,
   },
 });
+const Employer = mongoose.model("employer", employerSchema);
 
-export default employerSchema;
+export default Employer;
