@@ -9,3 +9,35 @@ export async function getDepartaments() {
     throw new Error("error al traer todos los departamentos.");
   }
 }
+
+export async function createNewDepartament({ departamentCode, name }) {
+  try {
+    const verifyDepartament = await Departament.findOne({ name });
+    if (verifyDepartament) {
+      throw new Error(`The specified username is not available.`);
+    }
+
+    const newDepartament = await Departament.create({ departamentCode, name });
+
+    return newDepartament;
+  } catch (error) {
+    console.error(error);
+    throw new Error(`Error creating the user: ${error.message}`);
+  }
+}
+
+
+export async function updateDepartament (departamentToUpdate, updateData) {
+  const { departamentCode, name } = updateData;
+
+  if (name) {
+    departamentToUpdate.name = name;
+  }
+
+  if (departamentCode) {
+    departamentToUpdate.departamentCode = departamentCode
+  }
+
+  await departamentToUpdate.save();
+  return departamentToUpdate;
+}
