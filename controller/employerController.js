@@ -1,4 +1,9 @@
-import { getEmployers } from "../services/employerServices.js";
+import {
+  getEmployers,
+  getByCode,
+  updateEmployer,
+  addEmployer,
+} from "../services/employerServices.js";
 
 export async function listEmployer(req, res) {
   try {
@@ -6,5 +11,39 @@ export async function listEmployer(req, res) {
     res.status(200).json(employer);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+}
+
+export async function createEmployer(req, res) {
+  try {
+    const data = req.body;
+    const employer = await addEmployer(data);
+    if (typeof employer === "string") {
+      return res.status(404).json(employer);
+    } else {
+      return res.status(201).json({ message: "Empleado Creado" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export async function updateOneEmployer(req, res) {
+  try {
+    const data = req.body;
+    const employer = await getByCode(data.code);
+    if (typeof employer === "string") {
+      return res.status(404).json(employer);
+    } else {
+      const employerUpdate = await updateEmployer(employer, data);
+      return res
+        .status(200)
+        .json({
+          message: "Empleado Actualizado Con exito",
+          employer: employer,
+        });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 }

@@ -6,14 +6,13 @@ import apiRouter from './router/apiRouter.js'
 
 const app = express();
 
-
-
 dotenv.config();
 // const databaseConnect = require("./db/config");
+app.use(express.json());
 
 connectDatabase();
 
-app.use("/", apiRouter);
+app.use("", apiRouter);
 
 const port = process.env.PORT || 5020;
 
@@ -22,7 +21,7 @@ app.listen(port, () =>{
     console.log(`the server is running on the ${port}`)
 })
 
-app.use(express.json());
+
 // app.use(express.urlencoded({ extended: false }));
 // app.use(cors());
 
