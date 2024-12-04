@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.get("/get-all-employers", listEmployer);
 router.post("/create-employer", createEmployer);
-router.patch("/update-employers", updateOneEmployer);
+router.patch("/update-employers/:code", updateOneEmployer);
 router.delete("/delete-employer/:codigo", DeleteEmployer)
 export default router;

@@ -31,12 +31,13 @@ export async function createEmployer(req, res) {
 
 export async function updateOneEmployer(req, res) {
   try {
+    const code = req.params.code
     const data = req.body;
-    const employer = await getByCode(data.code);
+    const employer = await getByCode(code);
     if (typeof employer === "string") {
       return res.status(404).json(employer);
     } else {
-      const employerUpdate = await updateEmployer(employer, data);
+      const employerUpdate = await updateEmployer(employer, data, code);
       return res.status(200).json({
         message: "Empleado Actualizado Con exito",
         employer: employer,
