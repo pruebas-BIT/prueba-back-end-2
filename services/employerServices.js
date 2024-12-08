@@ -45,7 +45,7 @@ export async function getByCode(code) {
   }
 }
 
-export async function updateEmployer(employer, data) {
+export async function updateEmployer(employer, data, code) {
   try {
     const { name, lastname1, lastname2, departamentCode } = data;
     employer.name = name || employer.name;
@@ -57,7 +57,7 @@ export async function updateEmployer(employer, data) {
     return employer;
   } catch (error) {
     throw new Error(
-      `No se pudo actualizar el empleado con Codigo: ${data.code}`
+      `No se pudo actualizar el empleado con Codigo: ${code}`
     );
   }
 }
