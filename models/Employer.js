@@ -1,6 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const employerSchema = Schema({
+  //_id:String,
   code: {
     type: Number,
     required: true,

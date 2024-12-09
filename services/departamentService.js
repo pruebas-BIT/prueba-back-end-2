@@ -9,14 +9,18 @@ export async function getDepartaments() {
   }
 }
 
-export async function createNewDepartament({ departamentCode, name }) {
+export async function createNewDepartament({ departamentCode, name }) { //antes de departament code poner _id
   try {
     const verifyDepartament = await Departament.findOne({ name });
     if (verifyDepartament) {
       throw new Error(`The specified username is not available.`);
     }
 
-    const newDepartament = await Departament.create({ departamentCode, name });
+    const newDepartament = await Departament.create({ departamentCode, name
+      // _id:departamentCode,
+      // departamentCode:departamentCode,
+      // name:name
+     });
 
     return newDepartament;
   } catch (error) {

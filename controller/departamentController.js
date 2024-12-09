@@ -26,7 +26,7 @@ export async function createDepartament(req, res) {
         .json({ message: "Este departamento ya ha sido creado" });
     }
 
-    const newDepartament = await Departament.create({ departamentCode, name });
+    const newDepartament = await Departament.create({ departamentCode, name }); //poner _id dentro de llaves
 
     return res.status(201).json(newDepartament);
   } catch (error) {
