@@ -1,13 +1,15 @@
 import { Schema, model } from "mongoose";
 
-const departamentSchema = Schema({
+const departamentSchema = new Schema({
   departamentCode: {
     type: Number,
     required: true,
+    unique: true  // Asegúrate de que cada código de departamento sea único
   },
-  name:{
-    type:String,
-    required:true,
+  name: {
+    type: String,
+    required: true,
+    unique: true  // Asegúrate de que cada nombre de departamento sea único
   }
 });
 
