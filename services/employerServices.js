@@ -3,7 +3,7 @@ import Departament from "../models/Deprtament.js";
 
 export async function getEmployers() {
   try {
-    const employer = await Employer.find().populate("departamentCode", "code");
+    const employer = await Employer.find().populate("departamentCode");
     return employer;
   } catch (error) {
     throw new Error("error al obtener todos los empleados");
